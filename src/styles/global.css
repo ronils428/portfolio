@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-zinc-650: #4b4f58;
+}
+
+html {
+  scroll-behavior: smooth;
+}
