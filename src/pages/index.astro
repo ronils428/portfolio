@@ -1,78 +1,470 @@
 ---
 import '../styles/global.css';
+
+// Contact links. Leave a value empty to hide that link.
+const GITHUB = 'https://github.com/ronils428';
+const LINKEDIN = '';
+const EMAIL = '';
+
+const links = [
+  GITHUB && { label: 'GitHub', href: GITHUB, icon: 'github' },
+  LINKEDIN && { label: 'LinkedIn', href: LINKEDIN, icon: 'linkedin' },
+  EMAIL && { label: 'Email', href: `mailto:${EMAIL}`, icon: 'mail' },
+].filter(Boolean) as { label: string; href: string; icon: string }[];
+
+const headline = [
+  { text: 'A little something ' },
+  { text: 'awesome', highlight: true },
+  { text: ' is in the works.' },
+];
+const fullHeadline = headline.map((part) => part.text).join('');
+const year = new Date().getFullYear();
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Ronil's portfolio is under construction. Check back soon." />
+    <meta name="description" content="Ronil Synghal's portfolio is under construction. Something awesome is in the works." />
+    <meta name="theme-color" content="#fafaf9" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Under Construction | Ronil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <title>Ronil Synghal · Coming Soon</title>
+    <script is:inline>
+      // Hide headline letters only when JS can type them back in.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js-typing');
+      }
+    </script>
   </head>
-  <body class="min-h-screen bg-zinc-50 text-zinc-950 antialiased">
-    <main class="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center px-6 text-center">
-      <div class="loader mb-10" aria-hidden="true">
-        <span></span><span></span><span></span>
-      </div>
+  <body class="bg-paper font-sans text-ink antialiased">
+    <div class="backdrop" aria-hidden="true"></div>
 
-      <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-teal-700">
-        Under Construction
-      </p>
-      <h1 class="text-4xl font-semibold leading-tight text-zinc-950 sm:text-5xl">
-        Something new is on the way.
-      </h1>
-      <p class="mt-5 text-lg leading-8 text-zinc-650">
-        I'm building my portfolio right now. Please check back later.
-      </p>
+    <div class="relative mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-5 py-6 sm:px-8 sm:py-8 lg:px-12">
+      <header class="reveal flex items-center justify-between gap-4" style="--d: 0ms">
+        <a href="/" class="group flex items-center gap-3 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-600">
+          <img src="/favicon.svg" alt="" width="32" height="32" class="size-8 transition-transform duration-300 group-hover:-rotate-6" />
+          <span class="font-display text-base font-semibold tracking-tight whitespace-nowrap">Ronil Synghal</span>
+        </a>
+        <p class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-zinc-200 bg-white/70 px-3 py-1.5 font-mono text-xs text-zinc-600 backdrop-blur-sm">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span><span class="sm:hidden">Brewing</span><span class="hidden sm:inline">Currently brewing</span> ideas <span aria-hidden="true">☕</span></span>
+        </p>
+      </header>
 
-      <div class="progress mt-10 h-1 w-48 overflow-hidden rounded-full bg-zinc-200" role="presentation">
-        <div class="h-full w-1/3 rounded-full bg-teal-600"></div>
-      </div>
-    </main>
+      <main class="grid flex-1 content-center items-center gap-6 py-6 sm:gap-8 sm:py-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-10">
+        <section class="order-2 lg:order-1">
+          <p class="reveal mb-5 font-mono text-xs font-medium tracking-wide text-teal-700 sm:text-sm" style="--d: 120ms">
+            <span aria-hidden="true">// </span>under construction
+          </p>
+
+          <h1 class="reveal font-display text-[clamp(2.4rem,6.5vw,4.6rem)] font-extrabold leading-[1.02] tracking-[-0.035em]" style="--d: 200ms">
+            <span class="sr-only">{fullHeadline}</span>
+            <span id="typed" aria-hidden="true">
+              {
+                headline.map((part) => (
+                  <span class={part.highlight ? 'highlight' : undefined}>
+                    {[...part.text].map((char) => <span class="char">{char}</span>)}
+                  </span>
+                ))
+              }<span class="cursor"></span>
+            </span>
+          </h1>
+
+          <p class="reveal mt-6 max-w-lg text-base leading-7 text-zinc-650 sm:text-lg sm:leading-8" style="--d: 320ms">
+            I'm rebuilding my corner of the internet: a home for projects, experiments, and the things I'm learning along the way. Check back soon.
+          </p>
+
+          <div class="reveal mt-8 flex flex-wrap items-center gap-x-4 gap-y-3" style="--d: 440ms">
+            <div class="pixels" aria-hidden="true">
+              {Array.from({ length: 8 }, (_, i) => <span style={`--i: ${i}`}></span>)}
+            </div>
+            <p class="font-mono text-xs text-zinc-500 sm:text-sm">Making things happen, one pixel at a time.</p>
+          </div>
+        </section>
+
+        <div class="reveal order-1 mx-auto w-full max-w-[13rem] sm:max-w-xs lg:order-2 lg:max-w-md" style="--d: 260ms" aria-hidden="true">
+          <svg class="scene w-full" viewBox="0 0 360 300" fill="none">
+            <circle cx="186" cy="150" r="118" fill="#ccfbf1" opacity="0.55" />
+            <ellipse cx="160" cy="262" rx="120" ry="8" fill="#0a0a0a" opacity="0.06" />
+
+            <g class="sparkle" style="--s: 0s">
+              <path d="M322 58l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#14b8a6" />
+            </g>
+            <g class="sparkle" style="--s: 1.2s">
+              <path d="M34 112l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#0a0a0a" />
+            </g>
+            <g class="sparkle" style="--s: 2.1s">
+              <path d="M300 22l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#0a0a0a" />
+            </g>
+
+            <g class="float">
+              <rect x="44" y="46" width="236" height="168" rx="18" fill="#fff" stroke="#0a0a0a" stroke-width="2.5" />
+              <path d="M44 78h236" stroke="#0a0a0a" stroke-width="2.5" />
+              <circle cx="66" cy="62" r="4.5" fill="#14b8a6" />
+              <circle cx="82" cy="62" r="4.5" fill="#0a0a0a" />
+              <circle cx="98" cy="62" r="4.5" fill="#d4d4d8" />
+
+              <rect class="line" style="--l: 0s" x="66" y="100" width="96" height="8" rx="4" fill="#0a0a0a" />
+              <rect class="line" style="--l: 0.45s" x="86" y="120" width="132" height="8" rx="4" fill="#14b8a6" />
+              <rect class="line" style="--l: 0.9s" x="86" y="140" width="76" height="8" rx="4" fill="#d4d4d8" />
+              <rect class="line" style="--l: 1.35s" x="106" y="160" width="110" height="8" rx="4" fill="#0a0a0a" />
+              <rect class="line" style="--l: 1.8s" x="66" y="180" width="54" height="8" rx="4" fill="#14b8a6" />
+              <rect class="caret" x="126" y="178" width="3" height="12" rx="1.5" fill="#0a0a0a" />
+            </g>
+
+            <g>
+              <rect x="252" y="226" width="34" height="34" rx="7" fill="#14b8a6" stroke="#0a0a0a" stroke-width="2.5" />
+              <rect x="290" y="226" width="34" height="34" rx="7" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="2.5" />
+              <rect class="drop" x="271" y="188" width="34" height="34" rx="7" fill="#fff" stroke="#0a0a0a" stroke-width="2.5" />
+              <g class="pointer">
+                <path d="M318 166v22l6-6 4 9 4-2-4-9h8z" fill="#0a0a0a" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+              </g>
+            </g>
+
+            <g>
+              <path class="steam" style="--t: 0s" d="M70 222c-5-6 5-10 0-16" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round" />
+              <path class="steam" style="--t: 0.9s" d="M84 222c-5-6 5-10 0-16" stroke="#14b8a6" stroke-width="2.5" stroke-linecap="round" />
+              <rect x="56" y="228" width="42" height="34" rx="9" fill="#fff" stroke="#0a0a0a" stroke-width="2.5" />
+              <path d="M98 236h4a7 7 0 0 1 0 14h-4" stroke="#0a0a0a" stroke-width="2.5" />
+              <path d="M64 240h26" stroke="#14b8a6" stroke-width="2.5" stroke-linecap="round" />
+            </g>
+          </svg>
+        </div>
+      </main>
+
+      <footer class="reveal flex flex-col gap-4 border-t border-zinc-200 pt-6 sm:flex-row sm:items-center sm:justify-between" style="--d: 560ms">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-3">
+          <p class="text-sm font-medium text-zinc-700">In the meantime, let's connect <span class="wave" aria-hidden="true">👋</span></p>
+          <ul class="flex flex-wrap gap-2">
+            {
+              links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target={link.icon === 'mail' ? undefined : '_blank'}
+                    rel={link.icon === 'mail' ? undefined : 'noopener noreferrer'}
+                    class="link-pill group"
+                  >
+                    {link.icon === 'github' && (
+                      <svg viewBox="0 0 16 16" class="size-4" fill="currentColor" aria-hidden="true">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                      </svg>
+                    )}
+                    {link.icon === 'linkedin' && (
+                      <svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
+                      </svg>
+                    )}
+                    {link.icon === 'mail' && (
+                      <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                      </svg>
+                    )}
+                    <span>{link.label}</span>
+                    <svg viewBox="0 0 24 24" class="arrow size-3.5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <p class="font-mono text-xs text-zinc-400">© {year} Ronil Synghal</p>
+      </footer>
+    </div>
+
+    <script>
+      const root = document.documentElement;
+      if (root.classList.contains('js-typing')) {
+        const chars = Array.from(document.querySelectorAll<HTMLElement>('#typed .char'));
+        const cursor = document.querySelector<HTMLElement>('#typed .cursor');
+        let i = 0;
+
+        const typeNext = () => {
+          if (i >= chars.length) {
+            root.classList.add('typed-done');
+            return;
+          }
+          const char = chars[i++];
+          char.classList.add('on');
+          char.after(cursor!);
+          const pause = /[\s.,]/.test(char.textContent ?? '') ? 110 : 42 + Math.random() * 40;
+          setTimeout(typeNext, pause);
+        };
+
+        if (cursor) setTimeout(typeNext, 650);
+      } else {
+        root.classList.add('typed-done');
+      }
+    </script>
   </body>
 </html>
 
 <style>
-  .loader {
-    display: flex;
-    gap: 0.6rem;
+  /* Soft dot grid with a teal glow */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40rem 30rem at 85% 15%, rgb(20 184 166 / 0.09), transparent 70%),
+      radial-gradient(circle at 1px 1px, rgb(10 10 10 / 0.07) 1px, transparent 0) 0 0 / 24px 24px;
+    mask-image: linear-gradient(to bottom, black, transparent 95%);
   }
 
-  .loader span {
-    width: 0.85rem;
-    height: 0.85rem;
+  /* Entrance */
+  .reveal {
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Status dot */
+  .pulse-dot {
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 9999px;
+    background: var(--color-teal-500);
+  }
+
+  .pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes ping {
+    75%, 100% { transform: scale(2.4); opacity: 0; }
+  }
+
+  /* Typed headline */
+  :global(.js-typing) #typed .char {
+    visibility: hidden;
+  }
+
+  :global(.js-typing) #typed .char.on {
+    visibility: visible;
+  }
+
+  .cursor {
+    position: relative;
+    display: inline-block;
+    width: 0;
+  }
+
+  .cursor::after {
+    content: '';
+    position: absolute;
+    left: 0.06em;
+    bottom: -0.08em;
+    width: 0.09em;
+    height: 0.95em;
+    border-radius: 2px;
     background: var(--color-teal-600);
-    animation: bounce 1.2s ease-in-out infinite;
+    animation: blink 1.05s steps(1) infinite;
   }
 
-  .loader span:nth-child(2) {
-    animation-delay: 0.15s;
+  @keyframes blink {
+    50% { opacity: 0; }
   }
 
-  .loader span:nth-child(3) {
-    animation-delay: 0.3s;
+  .highlight {
+    color: var(--color-teal-600);
+    background: linear-gradient(var(--color-teal-100), var(--color-teal-100)) no-repeat 0 88% / 0% 0.22em;
+    transition: background-size 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
-  .progress > div {
-    animation: slide 1.8s ease-in-out infinite;
+  :global(.typed-done) .highlight {
+    background-size: 100% 0.22em;
   }
 
-  @keyframes bounce {
-    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-    40% { transform: translateY(-0.75rem); opacity: 1; }
+  /* Decorative pixel wave */
+  .pixels {
+    display: flex;
+    gap: 5px;
   }
 
-  @keyframes slide {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(300%); }
+  .pixels span {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--color-zinc-200);
+    animation: pixel 2.4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.14s);
+  }
+
+  @keyframes pixel {
+    0%, 60%, 100% { background: var(--color-zinc-200); transform: none; }
+    20% { background: var(--color-teal-500); transform: translateY(-4px); }
+    35% { background: var(--color-ink); transform: none; }
+  }
+
+  /* Illustration */
+  .scene * {
+    transform-box: fill-box;
+  }
+
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    50% { transform: translateY(-6px); }
+  }
+
+  .line {
+    transform-origin: left center;
+    animation: write 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-delay: var(--l);
+  }
+
+  @keyframes write {
+    0% { transform: scaleX(0); }
+    10%, 82% { transform: scaleX(1); }
+    92%, 100% { transform: scaleX(0); }
+  }
+
+  .caret {
+    animation: blink 1.05s steps(1) infinite;
+  }
+
+  .drop {
+    animation: drop 4.5s cubic-bezier(0.3, 0, 0.3, 1) infinite;
+  }
+
+  @keyframes drop {
+    0%, 8% { transform: translateY(-46px) rotate(-8deg); opacity: 0; }
+    30% { transform: translateY(0) rotate(0); opacity: 1; }
+    36% { transform: translateY(-5px); }
+    42%, 85% { transform: none; opacity: 1; }
+    100% { transform: none; opacity: 0; }
+  }
+
+  .pointer {
+    animation: point 4.5s ease-in-out infinite;
+  }
+
+  @keyframes point {
+    0%, 8% { transform: translate(-30px, -46px); }
+    30% { transform: translate(-6px, 0); }
+    55%, 100% { transform: translate(6px, 10px); }
+  }
+
+  .steam {
+    animation: steam 2.8s ease-in-out infinite;
+    animation-delay: var(--t);
+    opacity: 0;
+  }
+
+  @keyframes steam {
+    0% { transform: translateY(4px); opacity: 0; }
+    40% { opacity: 0.9; }
+    100% { transform: translateY(-10px); opacity: 0; }
+  }
+
+  .sparkle {
+    transform-origin: center;
+    animation: twinkle 3.2s ease-in-out infinite;
+    animation-delay: var(--s);
+  }
+
+  @keyframes twinkle {
+    0%, 100% { transform: scale(0.6) rotate(0); opacity: 0.35; }
+    50% { transform: scale(1) rotate(45deg); opacity: 1; }
+  }
+
+  /* Contact pills */
+  .link-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.5rem;
+    padding: 0 0.95rem;
+    border: 1px solid var(--color-zinc-200);
+    border-radius: 9999px;
+    background: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+  }
+
+  .link-pill:hover,
+  .link-pill:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--color-teal-500);
+    color: var(--color-teal-700);
+    box-shadow: 0 6px 18px -8px rgb(13 148 136 / 0.45);
+  }
+
+  .link-pill:focus-visible {
+    outline: 2px solid var(--color-teal-600);
+    outline-offset: 3px;
+  }
+
+  .link-pill .arrow {
+    opacity: 0.45;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .link-pill:hover .arrow,
+  .link-pill:focus-visible .arrow {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+
+  .wave {
+    display: inline-block;
+    transform-origin: 70% 70%;
+  }
+
+  footer p:hover .wave {
+    animation: wave 0.9s ease-in-out;
+  }
+
+  @keyframes wave {
+    20% { transform: rotate(16deg); }
+    40% { transform: rotate(-8deg); }
+    60% { transform: rotate(14deg); }
+    80% { transform: rotate(-4deg); }
+  }
+
+  /* Keep everything on one screen on short displays */
+  @media (max-height: 760px) and (max-width: 1023px) {
+    .scene { max-height: 24vh; }
+  }
+
+  @media (max-height: 680px) and (max-width: 639px) {
+    .scene { display: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .loader span,
-    .progress > div {
-      animation: none;
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
     }
+
+    .steam { opacity: 0.8; }
+    .pixels span:nth-child(-n + 3) { background: var(--color-teal-500); }
+    .pixels span:nth-child(4) { background: var(--color-ink); }
   }
 </style>
